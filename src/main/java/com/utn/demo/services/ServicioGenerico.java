@@ -65,7 +65,7 @@ public abstract class ServicioGenerico <E, R extends JpaRepository<E, Integer>> 
 
 	}
 
-	/*@Override
+	@Override
 	public int countPages(int size) throws Exception {
 		try {
 			Pageable pageable = PageRequest.of(0, size);
@@ -74,7 +74,7 @@ public abstract class ServicioGenerico <E, R extends JpaRepository<E, Integer>> 
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
-	}*/
+	}
 
 	@Override
 	public List<E> findAll(int page, int size) throws Exception {
