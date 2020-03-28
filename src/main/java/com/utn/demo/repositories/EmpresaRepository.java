@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.utn.demo.entities.Empresa;
 
 @Repository
-public interface EmpresaRepository extends JpaRepository<Empresa, Integer> {
+public interface EmpresaRepository extends JpaRepository<Empresa, Long> {
 
 }

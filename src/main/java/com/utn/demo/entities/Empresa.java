@@ -1,21 +1,27 @@
 package com.utn.demo.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
-public class Empresa implements Serializable {
+public class Empresa extends GenericEntity implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	@Id
+	/*@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private long id;*/
 	
 	@Size(min = 1, max = 128)
 	private String denominacion;
@@ -39,6 +45,10 @@ public class Empresa implements Serializable {
 	@Size(min = 1, max = 75)
 	private String email;
 	
+	@JsonIgnoreProperties(value = {"idEmpresa"}, allowSetters = true)
+	@OneToMany(mappedBy = "idEmpresa", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Noticia> noticias;
+	
 	public Empresa() {}
 
 	public Empresa(@Size(min = 1, max = 128) String denominacion, @Size(min = 1, max = 50) String telefono,
@@ -55,13 +65,13 @@ public class Empresa implements Serializable {
 		this.email = email;
 	}
 
-	public int getId() {
+	/*public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
-	}
+	}*/
 
 	public String getDenominacion() {
 		return denominacion;

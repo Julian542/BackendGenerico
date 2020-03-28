@@ -9,19 +9,22 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
-public class Noticia implements Serializable {
+public class Noticia extends GenericEntity implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	@Id
+	/*@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private long id;*/
 	
 	@Size(min = 1, max = 128)
 	private String titulo_de_la_noticia;
@@ -40,10 +43,9 @@ public class Noticia implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date fecha_publicacion;
 	
-	@ManyToOne
-	(
-			cascade = CascadeType.REFRESH,
-			fetch = FetchType.EAGER)
+	@JsonIgnoreProperties(value = {"noticias"})
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "idEmpresa")
 	private Empresa idEmpresa;
 	
 	public Noticia() {}
@@ -59,13 +61,13 @@ public class Noticia implements Serializable {
 		this.idEmpresa = idEmpresa;
 	}
 
-	public int getId() {
+	/*public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
-	}
+	}*/
 
 	public String getTitulo_de_la_noticia() {
 		return titulo_de_la_noticia;

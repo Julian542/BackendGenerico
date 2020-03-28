@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.utn.demo.entities.Noticia;
 
 @Repository
-public interface NoticiaRepository  extends JpaRepository<Noticia, Integer>{
+public interface NoticiaRepository  extends JpaRepository<Noticia, Long>{
 	
 	@Query("from Noticia n where n.titulo_de_la_noticia like %?1% or n.resumen_de_la_noticia like %?1%")
 	List<Noticia> buscarPorNombre(String consulta, Pageable pageable);
